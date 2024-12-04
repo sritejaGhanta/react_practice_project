@@ -6,14 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../core/store/app.reducer";
 import { APP_SORE } from "../../core/interface/user.interface";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 function Header(prop: any) {
   const dispatch = useDispatch();
   const userInfo = useSelector((store: APP_SORE) => store.user);
-
+  let navigate = useNavigate();
   const logout = () => {
     clearStorage()
     dispatch(clearUser())
+    navigate('/')
   }
 
   return (<>
@@ -185,10 +187,8 @@ function Header(prop: any) {
 
           <li className="nav-item dropdown pe-3">
 
-
-
             <a className="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <img src="{userInfo.last_name || 'assets/img/messages-3.jpg'}" alt="Profile" className="rounded-circle" />
+              <img src={userInfo.profile_image || 'assets/img/messages-3.jpg'} alt="Profile" className="rounded-circle" />
               <span className="d-none d-md-block dropdown-toggle ps-2">{userInfo.full_name}</span>
             </a>
 

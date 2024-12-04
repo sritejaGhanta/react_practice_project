@@ -5,5 +5,6 @@ export default {
     customer: {
         identity: "/api/company/customer-identity",
         update: "/api/company/update-customer-profile",
+        update_password: "api/auth/customer-change-password"
     }
 }

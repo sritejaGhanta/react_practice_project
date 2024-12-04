@@ -11,7 +11,6 @@ function ProfileComponent() {
     const dispatch = useDispatch();
     const userInfo = useSelector((store: APP_SORE) => store.user);
     const [profile, setProfile] = useState({});
-    console.log(userInfo)
 
 
 
@@ -344,33 +343,112 @@ function ProfileComponent() {
                                     </div>
 
                                     <div className="tab-pane fade pt-3" id="profile-change-password">
-                                        <form>
+                                        <Formik
+                                            initialValues={{
+                                                password: '',
+                                                newPassword: '',
+                                                confPassword: '',
+                                                passMissmatch: ''
+                                            }}
+                                            onSubmit={(values) => {
+                                                if (values.newPassword !== values.confPassword) {
+                                                    // TO DO add notification
+                                                    alert("pass and conf pass not matched ")
+                                                } else {
+                                                    console.log(values)
+                                                    axiosInstance.post(API_END_POINTS.customer.update_password, values).then(e => {
+                                                        console.log(e)
+                                                    })
+                                                }
 
-                                            <div className="row mb-3">
-                                                <label htmlFor="currentPassword" className="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                                                <div className="col-md-8 col-lg-9">
-                                                    <input name="password" type="password" className="form-control" id="currentPassword" />
-                                                </div>
-                                            </div>
+                                            }}
+                                            validate={values => {
+                                                const errors: any = {};
+                                                if (!values.password) {
+                                                    errors.password = 'Please enter Old Password';
+                                                }
 
-                                            <div className="row mb-3">
-                                                <label htmlFor="newPassword" className="col-md-4 col-lg-3 col-form-label">New Password</label>
-                                                <div className="col-md-8 col-lg-9">
-                                                    <input name="newpassword" type="password" className="form-control" id="newPassword" />
-                                                </div>
-                                            </div>
+                                                if (!values.newPassword) {
+                                                    errors.newPassword = 'Please enter New Password ';
+                                                }
 
-                                            <div className="row mb-3">
-                                                <label htmlFor="renewPassword" className="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                                                <div className="col-md-8 col-lg-9">
-                                                    <input name="renewpassword" type="password" className="form-control" id="renewPassword" />
-                                                </div>
-                                            </div>
+                                                if (!values.confPassword) {
+                                                    errors.confPassword = 'Please enter Conform Password';
+                                                }
 
-                                            <div className="text-center">
-                                                <button type="submit" className="btn btn-primary">Change Password</button>
-                                            </div>
-                                        </form>
+                                                if (values.newPassword !== values.confPassword) {
+                                                    errors.passMissmatch = 'Password and conform password is not same';
+                                                }
+                                                return errors;
+                                            }}
+                                        >
+                                            {({
+                                                values,
+                                                errors,
+                                                touched,
+                                                handleChange,
+                                                handleBlur,
+                                                handleSubmit,
+                                                isSubmitting,
+                                                /* and other goodies */
+                                            }) => (
+                                                <form onSubmit={handleSubmit} >
+
+                                                    <div className="row mb-3">
+                                                        <label htmlFor="password" className="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                                                        <div className="col-md-8 col-lg-9">
+                                                            <input
+                                                                name="password"
+                                                                type="password"
+                                                                className="form-control"
+                                                                id="password"
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                value={values.password}
+                                                            />
+                                                            <div className='text-danger'>{errors.password && touched.password && errors.password}</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row mb-3">
+                                                        <label htmlFor="newPassword" className="col-md-4 col-lg-3 col-form-label ">New Password</label>
+                                                        <div className="col-md-8 col-lg-9">
+                                                            <input
+                                                                name="newPassword"
+                                                                type="password"
+                                                                className="form-control"
+                                                                id="newPassword"
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                value={values.newPassword}
+                                                            />
+                                                            <div className='text-danger'>{errors.newPassword && touched.newPassword && errors.newPassword}</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="row mb-3">
+                                                        <label htmlFor="renewPassword" className="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                                                        <div className="col-md-8 col-lg-9">
+                                                            <input
+                                                                name="confPassword"
+                                                                type="password"
+                                                                className="form-control"
+                                                                id="confPassword"
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                value={values.confPassword}
+                                                            />
+                                                            <div className='text-danger'>{errors.confPassword && touched.confPassword && errors.confPassword}</div>
+                                                            {!errors.confPassword && <div className='text-danger'>{errors.passMissmatch && touched.passMissmatch && errors.passMissmatch}</div>}
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="text-center">
+                                                        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>Change Password</button>
+                                                    </div>
+                                                </form>
+                                            )}
+                                        </Formik>
 
                                     </div>
 

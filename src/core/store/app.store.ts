@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import UserReducer from './app.reducer'
-import LoaderReducer from './loder.reducer'
+import CommonReducer from './common.reducer'
 
 export default configureStore({
   reducer: {
     user: UserReducer,
-    loader: LoaderReducer
+    loader: CommonReducer.loader,
+    notification: CommonReducer.notification
   },
 })

@@ -1,0 +1,7 @@
+.custom-alert {
+    z-index: 1000;
+    position: fixed;
+    right: 1.7%;
+    top: 8%;
+    opacity: 0.9;
+}

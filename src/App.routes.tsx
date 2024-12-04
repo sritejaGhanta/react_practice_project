@@ -32,7 +32,7 @@ import envirolment from "./envirolments/envirolment.js";
 import coreApiEndPoints from "./service/core.api.end.points.js";
 import { clearUser, setUser } from "./core/store/app.reducer.js";
 import axios from "./service/http.server";
-import { startLoader, stopLoader } from "./core/store/loder.reducer.js";
+import { setNotification, startLoader, stopLoader } from "./core/store/common.reducer.js";
 
 
 function AppRoutes() {
@@ -41,8 +41,7 @@ function AppRoutes() {
     const logout = () => {
         clearStorage()
         dispatch(clearUser());
-        // sss.history
-
+        window.location.href = '/'
     }
 
     axios.interceptors.request.use(
@@ -59,12 +58,11 @@ function AppRoutes() {
     axios.interceptors.response.use(
         (response: any) => {
             dispatch(stopLoader())
-
+            dispatch(setNotification(response?.settings))
             return { ...response };
         },
         (error) => {
             dispatch(stopLoader())
-
             return Promise.reject(error);
         }
     );
@@ -88,7 +86,6 @@ function AppRoutes() {
                     }
                     result?.settings?.success == 1 ? dispatch(setUser(payLoad)) : logout();
                 } else { 
-                    alert()
                     logout()
                 }
                 loading = false
