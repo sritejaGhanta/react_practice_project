@@ -1,0 +1,15 @@
+.sidebar-nav .active{
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #4154f1;
+    transition: 0.3;
+    background: #f6f9ff;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+.nav-item  a{
+    padding: 10px 15px;
+    border-radius: 4px;
+}

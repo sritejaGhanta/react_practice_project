@@ -5,8 +5,9 @@ import { clearStorage } from "../../service/local.storage";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../core/store/app.reducer";
 import { APP_SORE } from "../../core/interface/user.interface";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router";
+import "./head.component.css"
 
 function Header(prop: any) {
   const dispatch = useDispatch();
@@ -21,10 +22,10 @@ function Header(prop: any) {
   return (<>
     <header id="header" className="header fixed-top d-flex align-items-center">
       <div className="d-flex align-items-center justify-content-between">
-        <a href="index.html" className="logo d-flex align-items-center">
+        <Link to='/' className="logo d-flex align-items-center">
           <img src="assets/img/logo.png" alt="" />
           <span className="d-none d-lg-block">NiceAdmin</span>
-        </a>
+        </Link>
         <i className="bi bi-list toggle-sidebar-btn"></i>
       </div>
 
@@ -256,12 +257,18 @@ function Header(prop: any) {
       <ul className="sidebar-nav" id="sidebar-nav">
 
         <li className="nav-item">
-          <a className="nav-link " href="index.html">
+          <NavLink to="/">
             <i className="bi bi-grid"></i>
             <span>Dashboard</span>
-          </a>
+          </NavLink>
         </li>
-
+        <li className="nav-item">
+          <NavLink to="/users">
+            <i className="bi bi-grid"></i>
+            <span>Users List</span>
+          </NavLink>
+        </li>
+{/* 
         <li className="nav-item">
           <a className="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
             <i className="bi bi-menu-button-wide"></i><span>Components</span><i className="bi bi-chevron-down ms-auto"></i>
@@ -481,7 +488,7 @@ function Header(prop: any) {
             <i className="bi bi-file-earmark"></i>
             <span>Blank</span>
           </a>
-        </li>
+        </li> */}
 
       </ul>
 

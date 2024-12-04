@@ -47,7 +47,6 @@ function AppRoutes() {
     axios.interceptors.request.use(
         (config) => {
             dispatch(startLoader())
-
             return config;
         },
         (error) => {
