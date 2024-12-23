@@ -6,12 +6,13 @@ import axiosInstance from "../../service/http.server";
 import API_END_POINTS from "../../service/core.api.end.points"
 import { setUser, updateUser } from "../../core/store/app.reducer";
 import { LoadBreadCrumb } from "../../core/genaral/genaral.methos";
+import { compose } from "redux";
 
 
 function ProfileComponent() {
     const dispatch = useDispatch();
     const userInfo = useSelector((store: APP_SORE) => store.user);
-    const [profile, setProfile] = useState({});
+    const [profile, setProfile] = useState('');
 
 
 
@@ -167,10 +168,12 @@ function ProfileComponent() {
                                                 form.append('phone', values.phone);
                                                 form.append('email', values.email);
 
+                                                console.log(profile, Object.keys(profile))
+
                                                 if (profile) {
                                                     //@ts-ignore
                                                     form.append('profileImage', profile); // Ensure this is a File object
-                                                }
+                                                } 
 
                                                 // Log the FormData content (optional, for debugging)
                                                 for (let [key, value] of form.entries()) {
