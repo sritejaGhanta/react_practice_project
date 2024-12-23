@@ -1,5 +1,5 @@
-import {  memo } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { memo, Suspense } from "react";
+import { BrowserRouter, useNavigate } from "react-router-dom";
 
 import AuthRoutes from "./auth/auth.routing";
 import ParentRoutes from "./modules/parent.routing";
@@ -39,9 +39,10 @@ function AppRoutes() {
     const dispatch = useDispatch()
 
     const logout = () => {
+        console.log('hello word')
         clearStorage()
         dispatch(clearUser());
-        window.location.href = '/'
+        window.location.href = 'http://localhost:4321/'
     }
 
     axios.interceptors.request.use(
@@ -68,12 +69,12 @@ function AppRoutes() {
 
     const userInfo: USER_INTERFACE = useSelector((state: any) => state.user);
     let loading = true;
-
+    console.log(userInfo)
     if (!userInfo.customer_id && readItem(envirolment.TOKEN_KEY)) {
         try {
             axios.get(coreApiEndPoints.customer.identity).then((result: API_RESPONSE) => {
                 if (result?.settings?.success) {
-                    let payLoad:any = {
+                    let payLoad: any = {
                         customer_id: result.data.customer_id,
                         full_name: result.data.full_name,
                         email: result.data.email,
@@ -84,8 +85,8 @@ function AppRoutes() {
                         address: result.data.address
                     }
                     result?.settings?.success == 1 ? dispatch(setUser(payLoad)) : logout();
-                } else { 
-                    logout()
+                } else {
+                    logout();
                 }
                 loading = false
             })
@@ -96,19 +97,12 @@ function AppRoutes() {
         }
     } else {
         loading = false
-
     }
 
     return (<>
         <BrowserRouter>
             {userInfo.customer_id && <ParentRoutes />}
             {(!loading && !userInfo.customer_id) && <AuthRoutes />}
-            {/* <Routes>
-                <Route path="*" Component={() => <PageNotFound />}> </Route>
-            </Routes> */}
-            {/* <Routes>
-                <Route path="/" element={userInfo.customer_id ? <ParentRoutes /> : <AuthRoutes />} />
-            </Routes> */}
         </BrowserRouter >
 
     </>)

@@ -9,6 +9,7 @@ import App from './App'
 import Spinner from './core/spinner/spinner'
 import PushNotification from './core/push-notification/notification'
 
+import './index.css'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <Provider store={store}>

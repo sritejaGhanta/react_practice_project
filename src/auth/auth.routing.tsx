@@ -6,7 +6,7 @@ function AuthRoutes() {
 
     return (<>
         <Routes>
-            <Route path="/" Component={Login} />
+            <Route path="/*" Component={Login} />
         </Routes>
     </>)
 }

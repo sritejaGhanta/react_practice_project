@@ -203,39 +203,11 @@ function Header(prop: any) {
               </li>
 
               <li>
-                <Link to="/profile" className="nav-link nav-profile d-flex align-items-center pe-0">
-                  <i className="bi bi-person"></i>
+                <NavLink to="/profile" className="nav-link sidebar-nav dropdown-item d-flex align-items-center">
+                  <i className="bi bi-person me-1"></i>
                   <span>My Profile</span>
-                </Link>
-                {/* <a className="dropdown-item d-flex align-items-center" >
-                  <i className="bi bi-person"></i>
-                  <span>My Profile</span>
-                </a> */}
+                </NavLink>
               </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-
-              <li>
-                <a className="dropdown-item d-flex align-items-center" href="users-profile.html">
-                  <i className="bi bi-gear"></i>
-                  <span>Account Settings</span>
-                </a>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-
-              <li>
-                <a className="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                  <i className="bi bi-question-circle"></i>
-                  <span>Need Help?</span>
-                </a>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-
               <li>
                 <a className="dropdown-item d-flex align-items-center" onClick={logout}>
                   <i className="bi bi-box-arrow-right"></i>
@@ -258,13 +230,13 @@ function Header(prop: any) {
 
         <li className="nav-item">
           <NavLink to="/">
-            <i className="bi bi-grid"></i>
+            <i className="bi bi-grid me-1"></i>
             <span>Dashboard</span>
           </NavLink>
         </li>
         <li className="nav-item">
           <NavLink to="/users">
-            <i className="bi bi-grid"></i>
+            <i className="bi  bi-person-lines-fill me-1"></i>
             <span>Users List</span>
           </NavLink>
         </li>

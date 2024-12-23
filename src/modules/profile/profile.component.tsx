@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import axiosInstance from "../../service/http.server";
 import API_END_POINTS from "../../service/core.api.end.points"
 import { setUser, updateUser } from "../../core/store/app.reducer";
+import { LoadBreadCrumb } from "../../core/genaral/genaral.methos";
 
 
 function ProfileComponent() {
@@ -16,16 +17,7 @@ function ProfileComponent() {
 
     return (
         <>
-            <div className="pagetitle">
-                <h1>Profile</h1>
-                <nav>
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                        {/* <li className="breadcrumb-item">Users</li> */}
-                        <li className="breadcrumb-item active">Profile</li>
-                    </ol>
-                </nav>
-            </div>
+            {LoadBreadCrumb("Profile", [{name: 'Profile'}])} 
 
             <section className="section profile">
                 <div className="row">
@@ -88,10 +80,10 @@ function ProfileComponent() {
                                             <div className="col-lg-9 col-md-8">Web Designer</div>
                                         </div> */}
 
-                                        <div className="row">
+                                        {/* <div className="row">
                                             <div className="col-lg-3 col-md-4 label">Country</div>
-                                            <div className="col-lg-9 col-md-8">USA</div>
-                                        </div>
+                                            <div className="col-lg-9 col-md-8">India</div>
+                                        </div> */}
 
                                         <div className="row">
                                             <div className="col-lg-3 col-md-4 label">Address</div>

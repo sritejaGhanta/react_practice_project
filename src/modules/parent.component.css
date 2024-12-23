@@ -3,3 +3,7 @@ Footer {
     bottom: 0;
     right: 40%;
 }
+
+.ag-header-center .ag-header-cell-label{
+    text-align: center;
+}

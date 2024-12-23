@@ -13,7 +13,7 @@ function PushNotification(prop) {
     }, [notify])
     return (<>
         {(notice && notify?.message) && 
-            <div className="custom-alert  alert alert-success w-25" role="alert">
+            <div className={`custom-alert  alert ${notify?.success ? "alert-success": "alert-danger"} w-25`} role="alert">
                 {notify.message}
             </div>
         }
